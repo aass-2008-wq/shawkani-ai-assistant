@@ -417,15 +417,17 @@
     <div class="topbar">
       <div class="brand">
         <div class="logos">
-          <!-- شعار المدرسة: ضع ملفك في المستودع باسم school-logo.jpg -->
+
+          <!-- شعار المدرسة (رابط مباشر) -->
           <div class="logo" title="شعار المدرسة">
-            <img src="school-logo.jpg" alt="شعار مدرسة الإمام الشوكاني">
+            <img src="https://i.postimg.cc/vHs9bTRM/O-U-O-U-U-O-U-U-3.png" alt="شعار مدرسة الإمام الشوكاني">
           </div>
 
-          <!-- شعار وزارة التعليم (SVG) -->
+          <!-- شعار وزارة التعليم (رابط مباشر) -->
           <div class="logo" title="شعار وزارة التعليم">
-            <img src="https://upload.wikimedia.org/wikipedia/ar/3/36/MOELogo.svg" alt="شعار وزارة التعليم">
+            <img src="https://i.postimg.cc/9XGR82DL/sh%CA%BFar-wzart-alt%CA%BFlym-aljdyd-1442-bdwn-khlfyt.png" alt="شعار وزارة التعليم">
           </div>
+
         </div>
 
         <div class="titles">
@@ -441,7 +443,7 @@
       <div class="meta">
         <div class="school">مدرسة الإمام الشوكاني الابتدائية بالمذنب</div>
         <div class="director">مدير المدرسة: توفيق بن ناصر العقيلي</div>
-        <div class="small">بإشراف الأستاذ مقرن المطيري</div>
+        <div class="small">تم تنفيذه داخل المدرسة من فريق البرمجة والذكاء الاصطناعي بإشراف الأستاذ مقرن المطيري</div>
       </div>
     </div>
 
@@ -503,7 +505,7 @@
   </div>
 
   <script>
-    // 1) ضع رابط الـWorker حقك هنا:
+    // ✅ رابط الـWorker (ووركر الذكاء الاصطناعي)
     const AI_ENDPOINT = "https://restless-rain-c0e8.aass-2008.workers.dev";
 
     const elMessages = document.getElementById("messages");
@@ -554,18 +556,25 @@
       setBusy(true);
 
       try{
+        // ✅ تحديثات مهمة لمنع Bad Request
         const res = await fetch(AI_ENDPOINT, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
           body: JSON.stringify({ question: q })
         });
 
         const data = await res.json().catch(() => ({}));
+
+        // لو الـWorker رجّع خطأ واضح
         if(!res.ok){
-          throw new Error(data?.error || ("HTTP " + res.status));
+          const msg = data?.error || ("HTTP " + res.status);
+          throw new Error(msg);
         }
 
-        // استبدال فقاعة الكتابة
+        // نجاح
         typingBubble.textContent = data.answer || "لم تصل إجابة الآن.";
         delete typingBubble.dataset.typing;
 
