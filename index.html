@@ -1,499 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>المساعد الذكي - مدرسة الإمام الشوكاني الابتدائية بالمذنب</title>
+  <meta charset="utf-8">
+  <title>المساعد الذكي للطلاب – مدرسة الإمام الشوكاني الابتدائية بالمذنب</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg1:#071a2b;
-      --bg2:#0b2a42;
-      --card:rgba(255,255,255,.07);
-      --card2:rgba(255,255,255,.05);
-      --border:rgba(255,255,255,.12);
-      --text:#e9f2ff;
-      --muted:rgba(233,242,255,.75);
-      --accent:#2aa7ff;
-      --gold:#f2c14e;
-      --good:#38d39f;
-      --danger:#ff6b6b;
-      --shadow: 0 18px 50px rgba(0,0,0,.35);
-      --radius:20px;
-    }
-
-    *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:"Tajawal", system-ui, -apple-system, Segoe UI, Arial;
-      color:var(--text);
-      background:
-        radial-gradient(900px 500px at 20% 10%, rgba(42,167,255,.25), transparent 55%),
-        radial-gradient(700px 420px at 80% 0%, rgba(242,193,78,.18), transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      min-height:100vh;
+      font-family:'Tajawal', sans-serif;
+      background:#0c2436;
+      color:#ffffff;
     }
-
     .container{
-      max-width:1200px;
-      margin:0 auto;
-      padding:22px 16px 40px;
+      max-width:1000px;
+      margin:auto;
+      padding:24px;
     }
-
-    /* Header */
-    .topbar{
+    header{
       display:flex;
       align-items:center;
-      justify-content:space-between;
       gap:16px;
-      padding:14px 16px;
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(10px);
+      background:#0f2f46;
+      padding:16px;
+      border-radius:14px;
     }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
-    }
-
-    .logos{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    /* ✅ الشعارات بدون مربعات: لا خلفية، لا قص، contain */
-    .logo{
-      width:58px;
-      height:58px;
+    header img{
+      width:70px;
+      height:70px;
       object-fit:contain;
-      display:block;
-      filter: drop-shadow(0 8px 16px rgba(0,0,0,.25));
     }
-
-    .titleWrap{min-width:0}
-    .title{
+    h1{
+      font-size:20px;
       margin:0;
+    }
+    .sub{
+      font-size:14px;
+      color:#cfe3f5;
+      margin-top:6px;
+    }
+    .box{
+      margin-top:24px;
+      background:#123a57;
+      padding:24px;
+      border-radius:16px;
+    }
+    .box h2{
+      margin-top:0;
       font-size:18px;
-      font-weight:800;
-      letter-spacing:.2px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
     }
-    .subtitle{
-      margin:4px 0 0;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.4;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(0,0,0,.18);
-      color:var(--muted);
-      font-size:13px;
-      white-space:nowrap;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      background:var(--good);
-      box-shadow:0 0 0 6px rgba(56,211,159,.12);
-    }
-
-    /* Layout */
-    .grid{
+    .btn{
+      display:inline-block;
       margin-top:16px;
-      display:grid;
-      grid-template-columns: 360px 1fr;
-      gap:16px;
+      padding:14px 22px;
+      background:#4aa3ff;
+      color:#000;
+      font-weight:700;
+      border-radius:12px;
+      text-decoration:none;
     }
-
-    @media (max-width: 980px){
-      .grid{grid-template-columns:1fr}
-      .logo{width:52px;height:52px}
-      .title{font-size:16px}
-    }
-
-    .panel{
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(10px);
-      overflow:hidden;
-    }
-
-    .panelHeader{
-      padding:14px 16px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .panelHeader h2{
-      margin:0;
-      font-size:15px;
-      font-weight:800;
-    }
-    .panelHeader span{
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .panelBody{padding:14px 16px}
-
-    .hintBox{
-      background:rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:16px;
-      padding:12px;
-      margin-bottom:12px;
-    }
-    .hintBox h3{
-      margin:0 0 8px;
-      font-size:14px;
-      font-weight:800;
-    }
-    .hintBox p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:13px;
-    }
-
-    .examples{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      margin-top:12px;
-    }
-
-    .exBtn{
-      width:100%;
-      text-align:right;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      font-family:inherit;
-      font-size:13px;
-      cursor:pointer;
-      transition:.15s ease;
-    }
-    .exBtn:hover{transform: translateY(-1px); background:rgba(255,255,255,.06)}
-    .exBtn:active{transform: translateY(0)}
-
-    /* Chat */
-    .chatWrap{
-      display:flex;
-      flex-direction:column;
-      height: 640px;
-    }
-    @media (max-width: 980px){ .chatWrap{height: 620px;} }
-
-    .chatTop{
-      padding:14px 16px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .chatTop h2{
-      margin:0;
-      font-size:15px;
-      font-weight:800;
-    }
-
-    .chatBox{
-      flex:1;
-      padding:14px 16px;
-      overflow:auto;
-    }
-
-    .msg{
-      max-width:86%;
-      margin:10px 0;
-      padding:12px 12px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.18);
-      line-height:1.8;
-      font-size:14px;
-      white-space:pre-wrap;
-    }
-    .me{ margin-right:auto; background:rgba(42,167,255,.14); border-color: rgba(42,167,255,.22); }
-    .ai{ margin-left:auto; background:rgba(242,193,78,.12); border-color: rgba(242,193,78,.22); }
-
-    .chatBottom{
-      padding:12px 12px;
-      border-top:1px solid rgba(255,255,255,.08);
-      display:grid;
-      grid-template-columns: 1fr 140px;
-      gap:10px;
-    }
-    @media (max-width: 520px){
-      .chatBottom{grid-template-columns:1fr}
-      .sendBtn{width:100%}
-    }
-
-    textarea{
-      resize:none;
-      height:56px;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.16);
-      color:var(--text);
-      font-family:inherit;
-      font-size:14px;
-      outline:none;
-    }
-    textarea::placeholder{color: rgba(233,242,255,.55)}
-
-    .sendBtn{
-      border:none;
-      border-radius:14px;
-      background:linear-gradient(135deg, var(--accent), #1b77ff);
-      color:white;
-      font-family:inherit;
-      font-weight:800;
-      font-size:15px;
-      cursor:pointer;
-      box-shadow: 0 14px 30px rgba(42,167,255,.18);
-      transition:.15s ease;
-    }
-    .sendBtn:hover{transform: translateY(-1px)}
-    .sendBtn:active{transform: translateY(0)}
-    .sendBtn:disabled{
-      opacity:.65;
-      cursor:not-allowed;
-      transform:none;
-    }
-
-    .footer{
-      margin-top:14px;
-      text-align:center;
-      color:rgba(233,242,255,.55);
-      font-size:12px;
-      padding:10px 8px;
-    }
-
     .note{
-      margin-top:10px;
-      color:rgba(233,242,255,.70);
-      font-size:12.5px;
-      line-height:1.7;
+      margin-top:20px;
+      font-size:14px;
+      color:#e4f0fa;
+      line-height:1.8;
     }
-    .note b{color: #fff}
-    .warn{color: rgba(255,107,107,.95); font-weight:700;}
+    footer{
+      margin-top:30px;
+      font-size:13px;
+      color:#c2d9ec;
+      text-align:center;
+    }
   </style>
 </head>
 
 <body>
-  <div class="container">
+<div class="container">
 
-    <!-- Top Bar -->
-    <div class="topbar">
-      <div class="brand">
-        <div class="logos">
-          <!-- شعار المدرسة -->
-          <img class="logo" alt="شعار المدرسة"
-               src="https://i.postimg.cc/vHs9bTRM/O-U-O-U-U-O-U-U-3.png">
-
-          <!-- شعار وزارة التعليم -->
-          <img class="logo" alt="شعار وزارة التعليم"
-               src="https://i.postimg.cc/9XGR82DL/sh%CA%BFar-wzart-alt%CA%BFl%D9%8Aym-aljdyd-1442-bdwn-khlfyt.png">
-        </div>
-
-        <div class="titleWrap">
-          <h1 class="title">المساعد الذكي – مدرسة الإمام الشوكاني الابتدائية بالمذنب</h1>
-          <p class="subtitle">مدير المدرسة: توفيق بن ناصر العقيلي • تنفيذ فريق البرمجة والذكاء الاصطناعي بإشراف الأستاذ مقرن المطيري</p>
-        </div>
-      </div>
-
-      <div class="pill" title="حالة الاتصال">
-        <span class="dot"></span>
-        <span id="statusText">جاهز للتجربة</span>
+  <header>
+    <img src="https://i.postimg.cc/vHs9bTRM/O-U-O-U-U-O-U-U-3.png" alt="شعار المدرسة">
+    <img src="https://i.postimg.cc/9XGR82DL/sh%CA%BFar-wzart-alt%CA%BFl%D9%8Aym-aljdyd-1442-bdwn-khlfyt.png" alt="شعار وزارة التعليم">
+    <div>
+      <h1>المساعد الذكي للطلاب</h1>
+      <div class="sub">
+        مدرسة الإمام الشوكاني الابتدائية بالمذنب<br>
+        مدير المدرسة: توفيق بن ناصر العقيلي
       </div>
     </div>
+  </header>
 
-    <!-- Grid -->
-    <div class="grid">
+  <div class="box">
+    <h2>التعلّم باستخدام الذكاء الاصطناعي</h2>
+    <p class="note">
+      تم إعداد هذه الصفحة لتمكين الطلاب من الاستفادة من أدوات الذكاء الاصطناعي في
+      شرح الدروس وحل الأسئلة بطريقة تعليمية آمنة، وذلك ضمن توجيه المعلم.
+    </p>
 
-      <!-- Left panel -->
-      <div class="panel">
-        <div class="panelHeader">
-          <h2>إرشادات سريعة</h2>
-          <span>لإجابة أدق</span>
-        </div>
+    <a class="btn" href="https://gemini.google.com/app" target="_blank">
+      فتح محادثة Gemini
+    </a>
 
-        <div class="panelBody">
-          <div class="hintBox">
-            <h3>كيف تسأل؟</h3>
-            <p>
-              اكتب السؤال كاملًا، واذكر الصف أو المستوى إذا احتجت.
-              مثال: “اشرح الاسم المقصور باختصار مع مثال – سادس”.
-            </p>
-          </div>
-
-          <div class="examples">
-            <button class="exBtn" onclick="fillExample('اشرح الاسم المقصور باختصار مع مثال واحد – سادس ابتدائي')">مثال 1: الاسم المقصور</button>
-            <button class="exBtn" onclick="fillExample('ما الفرق بين الاسم المقصور والمنقوص والممدود؟ مع أمثلة قصيرة')">مثال 2: الفرق بين الأنواع</button>
-            <button class="exBtn" onclick="fillExample('حل مسألة: 3/4 + 1/8 مع خطوات الحل')">مثال 3: مسألة كسور</button>
-          </div>
-
-          <div class="note">
-            <div><b>تنفيذ داخل المدرسة</b> من فريق البرمجة والذكاء الاصطناعي.</div>
-            <div>بإشراف: <b>الأستاذ مقرن المطيري</b></div>
-            <div class="warn">تنبيه: لا تضع مفتاح API في موقع عام بشكل دائم.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Chat panel -->
-      <div class="panel chatWrap">
-        <div class="chatTop">
-          <h2>محادثة الطالب مع المساعد</h2>
-          <span id="smallHint" style="color:rgba(233,242,255,.65);font-size:13px;">اكتب السؤال ثم اضغط “إرسال”</span>
-        </div>
-
-        <div class="chatBox" id="chatBox">
-          <div class="msg ai">مرحبًا 👋 اكتب سؤالك وسأعطيك شرحًا مبسطًا مع مثال.</div>
-        </div>
-
-        <div class="chatBottom">
-          <textarea id="q" placeholder="اكتب سؤالك هنا…"></textarea>
-          <button class="sendBtn" id="sendBtn" onclick="send()">إرسال</button>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="footer">
-      © 2026 – مدرسة الإمام الشوكاني الابتدائية بالمذنب • فريق البرمجة والذكاء الاصطناعي
-    </div>
+    <p class="note">
+      ملاحظة: يتطلب استخدام الخدمة تسجيل الدخول بحساب Google للطالب.
+    </p>
   </div>
 
-<script>
-  // ✅ ضع مفتاح Gemini هنا:
-  const GEMINI_API_KEY = "‏AIzaSyB9WXCIusrhwx4Vk3bxu2yDycP_-cEgcXY"; // ← الصق مفتاحك هنا
+  <footer>
+    تم تنفيذه داخل المدرسة من فريق البرمجة والذكاء الاصطناعي<br>
+    بإشراف الأستاذ مقرن المطيري
+  </footer>
 
-  // إعدادات عامة
-  const MODEL = "gemini-1.5-flash";
-  const statusText = document.getElementById("statusText");
-  const chatBox = document.getElementById("chatBox");
-  const sendBtn = document.getElementById("sendBtn");
-  const q = document.getElementById("q");
-
-  function fillExample(text){
-    q.value = text;
-    q.focus();
-  }
-
-  function addMsg(text, who="ai"){
-    const div = document.createElement("div");
-    div.className = "msg " + (who === "me" ? "me" : "ai");
-    div.textContent = text;
-    chatBox.appendChild(div);
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }
-
-  function setBusy(busy){
-    sendBtn.disabled = busy;
-    statusText.textContent = busy ? "جاري الاتصال…" : "جاهز للتجربة";
-  }
-
-  async function send(){
-    const question = (q.value || "").trim();
-    if(!question) return;
-
-    addMsg(question, "me");
-    q.value = "";
-
-    if(!GEMINI_API_KEY || GEMINI_API_KEY.includes("PASTE_")){
-      addMsg("لم يتم وضع مفتاح Gemini داخل الكود. ضع المفتاح في المتغير GEMINI_API_KEY ثم ارفع الموقع مرة أخرى.", "ai");
-      return;
-    }
-
-    setBusy(true);
-
-    try{
-      // Google Generative Language API (Gemini)
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
-
-      const body = {
-        contents: [{
-          role: "user",
-          parts: [{
-            text:
-`أنت مساعد تعليمي لطلاب المرحلة الابتدائية في السعودية.
-أجب بالعربية الفصحى المبسطة.
-قدّم (شرح مختصر + مثال واحد) إن كان مناسبًا.
-سؤال الطالب: ${question}`
-          }]
-        }],
-        generationConfig: {
-          temperature: 0.5,
-          maxOutputTokens: 300
-        }
-      };
-
-      const res = await fetch(url, {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(body)
-      });
-
-      const data = await res.json();
-
-      if(!res.ok){
-        console.error(data);
-        addMsg("تعذر الاتصال بالمساعد الآن. تحقّق من صحة المفتاح أو القيود في Google AI Studio (Usage/Rate limit).", "ai");
-        setBusy(false);
-        return;
-      }
-
-      const text =
-        data?.candidates?.[0]?.content?.parts?.map(p => p.text).join("") ||
-        "لم يتم استلام رد.";
-
-      addMsg(text, "ai");
-    }catch(err){
-      console.error(err);
-      addMsg("حدث خطأ أثناء الاتصال. تأكد من الشبكة أو جرّب مرة أخرى.", "ai");
-    }finally{
-      setBusy(false);
-    }
-  }
-
-  // إرسال بالـ Enter (بدون Shift)
-  q.addEventListener("keydown", (e) => {
-    if(e.key === "Enter" && !e.shiftKey){
-      e.preventDefault();
-      send();
-    }
-  });
-</script>
+</div>
 </body>
 </html>
