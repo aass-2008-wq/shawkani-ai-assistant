@@ -1,602 +1,499 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>المساعد الذكي | مدرسة الإمام الشوكاني الابتدائية بالمذنب</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المساعد الذكي - مدرسة الإمام الشوكاني الابتدائية بالمذنب</title>
 
-  <!-- خط عربي جميل -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg1:#061b2c;
-      --bg2:#0b2c44;
-      --card: rgba(255,255,255,.08);
-      --card2: rgba(255,255,255,.12);
-      --stroke: rgba(255,255,255,.14);
-      --text:#eef6ff;
-      --muted: rgba(238,246,255,.72);
-      --accent:#38bdf8;   /* سماوي */
-      --accent2:#fbbf24;  /* ذهبي */
-      --ok:#22c55e;
-      --danger:#ef4444;
+      --bg1:#071a2b;
+      --bg2:#0b2a42;
+      --card:rgba(255,255,255,.07);
+      --card2:rgba(255,255,255,.05);
+      --border:rgba(255,255,255,.12);
+      --text:#e9f2ff;
+      --muted:rgba(233,242,255,.75);
+      --accent:#2aa7ff;
+      --gold:#f2c14e;
+      --good:#38d39f;
+      --danger:#ff6b6b;
       --shadow: 0 18px 50px rgba(0,0,0,.35);
-      --radius: 22px;
+      --radius:20px;
     }
 
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:"Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-family:"Tajawal", system-ui, -apple-system, Segoe UI, Arial;
       color:var(--text);
-      min-height:100vh;
       background:
-        radial-gradient(1200px 700px at 20% 10%, rgba(56,189,248,.22), transparent 55%),
-        radial-gradient(1000px 600px at 90% 30%, rgba(251,191,36,.18), transparent 55%),
-        linear-gradient(160deg, var(--bg1), var(--bg2));
-      overflow-x:hidden;
+        radial-gradient(900px 500px at 20% 10%, rgba(42,167,255,.25), transparent 55%),
+        radial-gradient(700px 420px at 80% 0%, rgba(242,193,78,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
     }
 
-    .wrap{
-      width:min(1080px, 92vw);
-      margin: 28px auto 22px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:22px 16px 40px;
     }
 
+    /* Header */
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
-      padding: 16px 18px;
-      border:1px solid var(--stroke);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
-      box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .topbar::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background: radial-gradient(700px 260px at 35% 10%, rgba(56,189,248,.18), transparent 55%),
-                  radial-gradient(700px 260px at 75% 15%, rgba(251,191,36,.14), transparent 60%);
-      pointer-events:none;
-      filter: blur(6px);
-      opacity:.9;
+      gap:16px;
+      padding:14px 16px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
     }
 
     .brand{
       display:flex;
       align-items:center;
       gap:14px;
-      position:relative;
-      z-index:1;
+      min-width:0;
     }
 
     .logos{
       display:flex;
       align-items:center;
       gap:10px;
-      padding:8px 10px;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: 16px;
-      background: rgba(0,0,0,.12);
     }
 
+    /* ✅ الشعارات بدون مربعات: لا خلفية، لا قص، contain */
     .logo{
-      width:46px; height:46px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.12);
-      display:grid;
-      place-items:center;
+      width:58px;
+      height:58px;
+      object-fit:contain;
+      display:block;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,.25));
+    }
+
+    .titleWrap{min-width:0}
+    .title{
+      margin:0;
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:.2px;
+      white-space:nowrap;
       overflow:hidden;
-      border:1px solid rgba(255,255,255,.14);
+      text-overflow:ellipsis;
     }
-
-    .logo img{ width:100%; height:100%; object-fit:contain; padding:6px; background:#fff; }
-
-    .titles{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-      line-height:1.25;
-    }
-
-    .titles .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      color: var(--muted);
-      font-weight:500;
-      font-size: 14px;
+    .subtitle{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.4;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
     .pill{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding:6px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.14);
-      font-size: 13px;
-      color: rgba(238,246,255,.82);
-      white-space:nowrap;
-    }
-
-    .dot{
-      width:8px; height:8px;
+      padding:10px 12px;
       border-radius:999px;
-      background: var(--ok);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.12);
-    }
-
-    h1{
-      margin:0;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: .2px;
-    }
-
-    .subtitle{
-      margin:0;
-      color: var(--muted);
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    .meta{
-      position:relative;
-      z-index:1;
-      display:flex;
-      flex-direction:column;
-      align-items:flex-end;
-      gap:8px;
-      text-align:left;
-    }
-
-    .meta .school{
-      font-weight: 800;
-      font-size: 15px;
-      color: rgba(238,246,255,.92);
-    }
-    .meta .director{
-      font-weight: 600;
-      font-size: 14px;
-      color: rgba(238,246,255,.75);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:18px;
-      align-items:stretch;
-    }
-
-    @media (max-width: 900px){
-      .grid{ grid-template-columns: 1fr; }
-      .meta{ align-items:flex-start; text-align:right; }
-    }
-
-    .card{
-      border:1px solid var(--stroke);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
-    .cardHead{
-      padding: 16px 18px;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    .cardHead .title{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-
-    .cardHead .title strong{
-      font-size: 16px;
-      font-weight: 800;
-    }
-    .cardHead .title span{
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .badge{
-      padding: 8px 10px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.14);
-      font-size: 13px;
-      color: rgba(238,246,255,.78);
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.18);
+      color:var(--muted);
+      font-size:13px;
       white-space:nowrap;
     }
-
-    .chat{
-      padding: 14px 16px 16px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      height: 520px;
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background:var(--good);
+      box-shadow:0 0 0 6px rgba(56,211,159,.12);
     }
 
-    .messages{
-      flex:1;
-      overflow:auto;
-      padding: 10px;
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.12);
-    }
-
-    .msg{
-      display:flex;
-      gap:10px;
-      margin: 10px 0;
-      align-items:flex-start;
-    }
-
-    .avatar{
-      width:38px; height:38px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.10);
+    /* Layout */
+    .grid{
+      margin-top:16px;
       display:grid;
-      place-items:center;
-      font-weight: 900;
-      color: rgba(238,246,255,.9);
-      flex: 0 0 auto;
+      grid-template-columns: 360px 1fr;
+      gap:16px;
     }
 
-    .bubble{
-      max-width: 92%;
-      padding: 12px 14px;
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.08);
-      line-height: 1.75;
-      font-weight: 500;
-      color: rgba(238,246,255,.95);
-      white-space: pre-wrap;
-    }
-
-    .user .bubble{
-      background: linear-gradient(180deg, rgba(56,189,248,.20), rgba(56,189,248,.10));
-      border-color: rgba(56,189,248,.28);
-    }
-
-    .ai .bubble{
-      background: linear-gradient(180deg, rgba(251,191,36,.16), rgba(255,255,255,.06));
-      border-color: rgba(251,191,36,.22);
-    }
-
-    .composer{
-      display:flex;
-      gap:10px;
-      align-items:stretch;
-    }
-
-    textarea{
-      width:100%;
-      resize:none;
-      min-height: 52px;
-      max-height: 140px;
-      padding: 12px 12px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.12);
-      color: var(--text);
-      outline:none;
-      font-family: inherit;
-      font-size: 15px;
-      line-height: 1.5;
-    }
-
-    textarea::placeholder{ color: rgba(238,246,255,.55); }
-
-    button{
-      border:0;
-      border-radius: 16px;
-      padding: 0 16px;
-      font-family: inherit;
-      font-weight: 800;
-      cursor:pointer;
-      background: linear-gradient(135deg, var(--accent), rgba(56,189,248,.65));
-      color: #012033;
-      min-width: 120px;
-      box-shadow: 0 12px 30px rgba(56,189,248,.18);
-      transition: transform .08s ease;
-    }
-    button:active{ transform: scale(.98); }
-    button:disabled{
-      opacity:.55;
-      cursor:not-allowed;
-    }
-
-    .side{
-      padding: 16px 18px 18px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+      .logo{width:52px;height:52px}
+      .title{font-size:16px}
     }
 
     .panel{
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.10);
-      border-radius: 18px;
-      padding: 14px 14px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
     }
 
-    .panel h3{
-      margin:0 0 8px;
-      font-size: 15px;
-      font-weight: 900;
-    }
-    .panel p{
-      margin:0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-weight: 500;
-      font-size: 14px;
-    }
-
-    .tips{
-      display:grid;
-      gap:8px;
-      margin-top: 10px;
-    }
-    .tip{
+    .panelHeader{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
       display:flex;
+      align-items:center;
+      justify-content:space-between;
       gap:10px;
-      align-items:flex-start;
-      padding: 10px 12px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      color: rgba(238,246,255,.86);
-      font-size: 14px;
-      line-height: 1.65;
     }
-    .tip b{ color:#fff; }
+    .panelHeader h2{
+      margin:0;
+      font-size:15px;
+      font-weight:800;
+    }
+    .panelHeader span{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .panelBody{padding:14px 16px}
+
+    .hintBox{
+      background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      padding:12px;
+      margin-bottom:12px;
+    }
+    .hintBox h3{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:800;
+    }
+    .hintBox p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:13px;
+    }
+
+    .examples{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .exBtn{
+      width:100%;
+      text-align:right;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      font-family:inherit;
+      font-size:13px;
+      cursor:pointer;
+      transition:.15s ease;
+    }
+    .exBtn:hover{transform: translateY(-1px); background:rgba(255,255,255,.06)}
+    .exBtn:active{transform: translateY(0)}
+
+    /* Chat */
+    .chatWrap{
+      display:flex;
+      flex-direction:column;
+      height: 640px;
+    }
+    @media (max-width: 980px){ .chatWrap{height: 620px;} }
+
+    .chatTop{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .chatTop h2{
+      margin:0;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .chatBox{
+      flex:1;
+      padding:14px 16px;
+      overflow:auto;
+    }
+
+    .msg{
+      max-width:86%;
+      margin:10px 0;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+      line-height:1.8;
+      font-size:14px;
+      white-space:pre-wrap;
+    }
+    .me{ margin-right:auto; background:rgba(42,167,255,.14); border-color: rgba(42,167,255,.22); }
+    .ai{ margin-left:auto; background:rgba(242,193,78,.12); border-color: rgba(242,193,78,.22); }
+
+    .chatBottom{
+      padding:12px 12px;
+      border-top:1px solid rgba(255,255,255,.08);
+      display:grid;
+      grid-template-columns: 1fr 140px;
+      gap:10px;
+    }
+    @media (max-width: 520px){
+      .chatBottom{grid-template-columns:1fr}
+      .sendBtn{width:100%}
+    }
+
+    textarea{
+      resize:none;
+      height:56px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.16);
+      color:var(--text);
+      font-family:inherit;
+      font-size:14px;
+      outline:none;
+    }
+    textarea::placeholder{color: rgba(233,242,255,.55)}
+
+    .sendBtn{
+      border:none;
+      border-radius:14px;
+      background:linear-gradient(135deg, var(--accent), #1b77ff);
+      color:white;
+      font-family:inherit;
+      font-weight:800;
+      font-size:15px;
+      cursor:pointer;
+      box-shadow: 0 14px 30px rgba(42,167,255,.18);
+      transition:.15s ease;
+    }
+    .sendBtn:hover{transform: translateY(-1px)}
+    .sendBtn:active{transform: translateY(0)}
+    .sendBtn:disabled{
+      opacity:.65;
+      cursor:not-allowed;
+      transform:none;
+    }
 
     .footer{
+      margin-top:14px;
       text-align:center;
-      color: rgba(238,246,255,.68);
-      font-weight: 600;
-      font-size: 13px;
-      padding: 6px 10px 18px;
+      color:rgba(233,242,255,.55);
+      font-size:12px;
+      padding:10px 8px;
     }
 
-    .small{
-      font-size: 13px;
-      color: rgba(238,246,255,.70);
-      font-weight: 600;
+    .note{
+      margin-top:10px;
+      color:rgba(233,242,255,.70);
+      font-size:12.5px;
+      line-height:1.7;
     }
-
-    .typing{
-      display:inline-flex;
-      gap:6px;
-      align-items:center;
-    }
-    .typing i{
-      width:6px;height:6px;border-radius:999px;
-      background: rgba(255,255,255,.75);
-      display:inline-block;
-      animation: bounce 1.1s infinite ease-in-out;
-      opacity:.85;
-    }
-    .typing i:nth-child(2){ animation-delay:.15s;}
-    .typing i:nth-child(3){ animation-delay:.3s;}
-    @keyframes bounce{
-      0%, 80%, 100%{ transform: translateY(0); opacity:.55; }
-      40%{ transform: translateY(-5px); opacity:1; }
-    }
+    .note b{color: #fff}
+    .warn{color: rgba(255,107,107,.95); font-weight:700;}
   </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <div class="container">
 
+    <!-- Top Bar -->
     <div class="topbar">
       <div class="brand">
         <div class="logos">
+          <!-- شعار المدرسة -->
+          <img class="logo" alt="شعار المدرسة"
+               src="https://i.postimg.cc/vHs9bTRM/O-U-O-U-U-O-U-U-3.png">
 
-          <!-- شعار المدرسة (رابط مباشر) -->
-          <div class="logo" title="شعار المدرسة">
-            <img src="https://i.postimg.cc/vHs9bTRM/O-U-O-U-U-O-U-U-3.png" alt="شعار مدرسة الإمام الشوكاني">
-          </div>
-
-          <!-- شعار وزارة التعليم (رابط مباشر) -->
-          <div class="logo" title="شعار وزارة التعليم">
-            <img src="https://i.postimg.cc/9XGR82DL/sh%CA%BFar-wzart-alt%CA%BFlym-aljdyd-1442-bdwn-khlfyt.png" alt="شعار وزارة التعليم">
-          </div>
-
+          <!-- شعار وزارة التعليم -->
+          <img class="logo" alt="شعار وزارة التعليم"
+               src="https://i.postimg.cc/9XGR82DL/sh%CA%BFar-wzart-alt%CA%BFl%D9%8Aym-aljdyd-1442-bdwn-khlfyt.png">
         </div>
 
-        <div class="titles">
-          <div class="kicker">
-            <span class="pill"><span class="dot"></span> جاهز للاستخدام داخل المدرسة</span>
-            <span class="pill">فريق البرمجة والذكاء الاصطناعي</span>
-          </div>
-          <h1>المساعد الذكي للطلاب</h1>
-          <p class="subtitle">اسأل عن حل مسألة أو اطلب شرحًا مبسطًا لأي موضوع — وستصلك إجابة واضحة مع مثال.</p>
+        <div class="titleWrap">
+          <h1 class="title">المساعد الذكي – مدرسة الإمام الشوكاني الابتدائية بالمذنب</h1>
+          <p class="subtitle">مدير المدرسة: توفيق بن ناصر العقيلي • تنفيذ فريق البرمجة والذكاء الاصطناعي بإشراف الأستاذ مقرن المطيري</p>
         </div>
       </div>
 
-      <div class="meta">
-        <div class="school">مدرسة الإمام الشوكاني الابتدائية بالمذنب</div>
-        <div class="director">مدير المدرسة: توفيق بن ناصر العقيلي</div>
-        <div class="small">تم تنفيذه داخل المدرسة من فريق البرمجة والذكاء الاصطناعي بإشراف الأستاذ مقرن المطيري</div>
+      <div class="pill" title="حالة الاتصال">
+        <span class="dot"></span>
+        <span id="statusText">جاهز للتجربة</span>
       </div>
     </div>
 
+    <!-- Grid -->
     <div class="grid">
-      <!-- صندوق المحادثة -->
-      <div class="card">
-        <div class="cardHead">
-          <div class="title">
-            <strong>محادثة الطالب مع المساعد</strong>
-            <span>اكتب سؤالك بوضوح… مثال: “اشرح الاسم المقصور باختصار مع مثال”.</span>
-          </div>
-          <div class="badge">وضع المدرسة • إجابة مختصرة + مثال</div>
+
+      <!-- Left panel -->
+      <div class="panel">
+        <div class="panelHeader">
+          <h2>إرشادات سريعة</h2>
+          <span>لإجابة أدق</span>
         </div>
 
-        <div class="chat">
-          <div class="messages" id="messages" aria-live="polite"></div>
-
-          <div class="composer">
-            <textarea id="q" placeholder="اكتب سؤالك هنا…"></textarea>
-            <button id="send">إرسال</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- لوحة جانبية -->
-      <div class="card">
-        <div class="cardHead">
-          <div class="title">
-            <strong>إرشادات سريعة</strong>
-            <span>لتكون الإجابة أدق وأسرع</span>
-          </div>
-          <div class="badge">تصميم عصري</div>
-        </div>
-
-        <div class="side">
-          <div class="panel">
+        <div class="panelBody">
+          <div class="hintBox">
             <h3>كيف تسأل؟</h3>
-            <p>اكتب السؤال كاملًا، وحدد الصف أو المستوى إذا احتجت. اطلب “شرح مبسط + مثال” للحصول على أفضل نتيجة.</p>
-
-            <div class="tips">
-              <div class="tip"><b>مثال 1:</b> اشرح كان وأخواتها باختصار مع مثال.</div>
-              <div class="tip"><b>مثال 2:</b> حل مسألة: ٣/٤ + ١/٨ مع خطوات.</div>
-              <div class="tip"><b>مثال 3:</b> ما الفرق بين الاسم المقصور والمنقوص؟</div>
-            </div>
+            <p>
+              اكتب السؤال كاملًا، واذكر الصف أو المستوى إذا احتجت.
+              مثال: “اشرح الاسم المقصور باختصار مع مثال – سادس”.
+            </p>
           </div>
 
-          <div class="panel">
-            <h3>تنفيذ داخل المدرسة</h3>
-            <p>تم تنفيذه داخل المدرسة من فريق البرمجة والذكاء الاصطناعي بإشراف الأستاذ مقرن المطيري.</p>
+          <div class="examples">
+            <button class="exBtn" onclick="fillExample('اشرح الاسم المقصور باختصار مع مثال واحد – سادس ابتدائي')">مثال 1: الاسم المقصور</button>
+            <button class="exBtn" onclick="fillExample('ما الفرق بين الاسم المقصور والمنقوص والممدود؟ مع أمثلة قصيرة')">مثال 2: الفرق بين الأنواع</button>
+            <button class="exBtn" onclick="fillExample('حل مسألة: 3/4 + 1/8 مع خطوات الحل')">مثال 3: مسألة كسور</button>
+          </div>
+
+          <div class="note">
+            <div><b>تنفيذ داخل المدرسة</b> من فريق البرمجة والذكاء الاصطناعي.</div>
+            <div>بإشراف: <b>الأستاذ مقرن المطيري</b></div>
+            <div class="warn">تنبيه: لا تضع مفتاح API في موقع عام بشكل دائم.</div>
           </div>
         </div>
       </div>
+
+      <!-- Chat panel -->
+      <div class="panel chatWrap">
+        <div class="chatTop">
+          <h2>محادثة الطالب مع المساعد</h2>
+          <span id="smallHint" style="color:rgba(233,242,255,.65);font-size:13px;">اكتب السؤال ثم اضغط “إرسال”</span>
+        </div>
+
+        <div class="chatBox" id="chatBox">
+          <div class="msg ai">مرحبًا 👋 اكتب سؤالك وسأعطيك شرحًا مبسطًا مع مثال.</div>
+        </div>
+
+        <div class="chatBottom">
+          <textarea id="q" placeholder="اكتب سؤالك هنا…"></textarea>
+          <button class="sendBtn" id="sendBtn" onclick="send()">إرسال</button>
+        </div>
+      </div>
+
     </div>
 
     <div class="footer">
-      © 2026 — مدرسة الإمام الشوكاني الابتدائية بالمذنب • فريق البرمجة والذكاء الاصطناعي
+      © 2026 – مدرسة الإمام الشوكاني الابتدائية بالمذنب • فريق البرمجة والذكاء الاصطناعي
     </div>
-
   </div>
 
-  <script>
-    // ✅ رابط الـWorker (ووركر الذكاء الاصطناعي)
-    const AI_ENDPOINT = "https://restless-rain-c0e8.aass-2008.workers.dev";
+<script>
+  // ✅ ضع مفتاح Gemini هنا:
+  const GEMINI_API_KEY = "‏AIzaSyB9WXCIusrhwx4Vk3bxu2yDycP_-cEgcXY"; // ← الصق مفتاحك هنا
 
-    const elMessages = document.getElementById("messages");
-    const elQ = document.getElementById("q");
-    const elSend = document.getElementById("send");
+  // إعدادات عامة
+  const MODEL = "gemini-1.5-flash";
+  const statusText = document.getElementById("statusText");
+  const chatBox = document.getElementById("chatBox");
+  const sendBtn = document.getElementById("sendBtn");
+  const q = document.getElementById("q");
 
-    function addMessage(role, text, isTyping=false){
-      const row = document.createElement("div");
-      row.className = "msg " + (role === "user" ? "user" : "ai");
+  function fillExample(text){
+    q.value = text;
+    q.focus();
+  }
 
-      const avatar = document.createElement("div");
-      avatar.className = "avatar";
-      avatar.textContent = role === "user" ? "ط" : "ذ";
+  function addMsg(text, who="ai"){
+    const div = document.createElement("div");
+    div.className = "msg " + (who === "me" ? "me" : "ai");
+    div.textContent = text;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
 
-      const bubble = document.createElement("div");
-      bubble.className = "bubble";
+  function setBusy(busy){
+    sendBtn.disabled = busy;
+    statusText.textContent = busy ? "جاري الاتصال…" : "جاهز للتجربة";
+  }
 
-      if(isTyping){
-        bubble.innerHTML = `<span class="typing"><i></i><i></i><i></i></span> جاري تجهيز الإجابة…`;
-        bubble.dataset.typing = "1";
-      }else{
-        bubble.textContent = text;
-      }
+  async function send(){
+    const question = (q.value || "").trim();
+    if(!question) return;
 
-      row.appendChild(avatar);
-      row.appendChild(bubble);
-      elMessages.appendChild(row);
-      elMessages.scrollTop = elMessages.scrollHeight;
-      return bubble;
+    addMsg(question, "me");
+    q.value = "";
+
+    if(!GEMINI_API_KEY || GEMINI_API_KEY.includes("PASTE_")){
+      addMsg("لم يتم وضع مفتاح Gemini داخل الكود. ضع المفتاح في المتغير GEMINI_API_KEY ثم ارفع الموقع مرة أخرى.", "ai");
+      return;
     }
 
-    function setBusy(busy){
-      elSend.disabled = busy;
-      elQ.disabled = busy;
-    }
+    setBusy(true);
 
-    // رسالة ترحيب
-    addMessage("ai", "مرحبًا 👋\nاكتب سؤالك، وسأعطيك شرحًا مبسطًا مع مثال واحد.");
+    try{
+      // Google Generative Language API (Gemini)
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
 
-    async function ask(){
-      const q = (elQ.value || "").trim();
-      if(!q) return;
-
-      addMessage("user", q);
-      elQ.value = "";
-
-      const typingBubble = addMessage("ai", "", true);
-      setBusy(true);
-
-      try{
-        // ✅ تحديثات مهمة لمنع Bad Request
-        const res = await fetch(AI_ENDPOINT, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({ question: q })
-        });
-
-        const data = await res.json().catch(() => ({}));
-
-        // لو الـWorker رجّع خطأ واضح
-        if(!res.ok){
-          const msg = data?.error || ("HTTP " + res.status);
-          throw new Error(msg);
+      const body = {
+        contents: [{
+          role: "user",
+          parts: [{
+            text:
+`أنت مساعد تعليمي لطلاب المرحلة الابتدائية في السعودية.
+أجب بالعربية الفصحى المبسطة.
+قدّم (شرح مختصر + مثال واحد) إن كان مناسبًا.
+سؤال الطالب: ${question}`
+          }]
+        }],
+        generationConfig: {
+          temperature: 0.5,
+          maxOutputTokens: 300
         }
+      };
 
-        // نجاح
-        typingBubble.textContent = data.answer || "لم تصل إجابة الآن.";
-        delete typingBubble.dataset.typing;
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(body)
+      });
 
-      }catch(err){
-        typingBubble.textContent =
-          "تعذر الاتصال بالمساعد الآن.\n" +
-          "تأكد من رابط الـWorker وأن المفتاح مضاف كـ Secret.\n" +
-          "تفاصيل: " + (err?.message || err);
-      }finally{
+      const data = await res.json();
+
+      if(!res.ok){
+        console.error(data);
+        addMsg("تعذر الاتصال بالمساعد الآن. تحقّق من صحة المفتاح أو القيود في Google AI Studio (Usage/Rate limit).", "ai");
         setBusy(false);
-        elQ.focus();
-        elMessages.scrollTop = elMessages.scrollHeight;
+        return;
       }
-    }
 
-    elSend.addEventListener("click", ask);
-    elQ.addEventListener("keydown", (e) => {
-      if(e.key === "Enter" && !e.shiftKey){
-        e.preventDefault();
-        ask();
-      }
-    });
-  </script>
+      const text =
+        data?.candidates?.[0]?.content?.parts?.map(p => p.text).join("") ||
+        "لم يتم استلام رد.";
+
+      addMsg(text, "ai");
+    }catch(err){
+      console.error(err);
+      addMsg("حدث خطأ أثناء الاتصال. تأكد من الشبكة أو جرّب مرة أخرى.", "ai");
+    }finally{
+      setBusy(false);
+    }
+  }
+
+  // إرسال بالـ Enter (بدون Shift)
+  q.addEventListener("keydown", (e) => {
+    if(e.key === "Enter" && !e.shiftKey){
+      e.preventDefault();
+      send();
+    }
+  });
+</script>
 </body>
 </html>
