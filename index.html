@@ -1,117 +1,183 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>المساعد الذكي للطلاب – مدرسة الإمام الشوكاني الابتدائية بالمذنب</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المساعد الذكي - مدرسة الإمام الشوكاني الابتدائية بالمذنب</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 
   <style>
+    :root{
+      --bg1:#071a2b;
+      --bg2:#0b2a42;
+      --card:rgba(255,255,255,.07);
+      --border:rgba(255,255,255,.12);
+      --text:#e9f2ff;
+      --muted:rgba(233,242,255,.75);
+      --accent:#2aa7ff;
+      --gold:#f2c14e;
+      --good:#38d39f;
+      --radius:20px;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+
+    *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:'Tajawal', sans-serif;
-      background:#0c2436;
-      color:#ffffff;
+      font-family:"Tajawal", sans-serif;
+      color:var(--text);
+      background: radial-gradient(circle at center, var(--bg2), var(--bg1));
+      min-height:100vh;
     }
-    .container{
-      max-width:1000px;
-      margin:auto;
-      padding:24px;
+
+    .container{ max-width:1200px; margin:0 auto; padding:20px; }
+
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:15px; border:1px solid var(--border);
+      background:rgba(255,255,255,.05); border-radius:var(--radius);
+      backdrop-filter: blur(10px); margin-bottom: 20px;
     }
-    header{
-      display:flex;
-      align-items:center;
-      gap:16px;
-      background:#0f2f46;
-      padding:16px;
-      border-radius:14px;
+
+    .brand{ display:flex; align-items:center; gap:15px; }
+    .logo{ width:60px; height:60px; object-fit:contain; }
+    .title{ margin:0; font-size:18px; font-weight:800; }
+    .subtitle{ margin:5px 0 0; color:var(--muted); font-size:13px; }
+
+    .grid{ display:grid; grid-template-columns: 350px 1fr; gap:20px; }
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
+
+    .panel{
+      border:1px solid var(--border); background:rgba(255,255,255,.03);
+      border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column;
     }
-    header img{
-      width:70px;
-      height:70px;
-      object-fit:contain;
+
+    .panelHeader{ padding:15px; border-bottom:1px solid var(--border); font-weight:800; background:rgba(255,255,255,.05); }
+    .panelBody{ padding:15px; }
+
+    .exBtn{
+      width:100%; text-align:right; padding:12px; margin-bottom:10px;
+      border-radius:12px; border:1px solid var(--border);
+      background:rgba(255,255,255,.05); color:var(--text); cursor:pointer; font-family:inherit;
     }
-    h1{
-      font-size:20px;
-      margin:0;
-    }
-    .sub{
-      font-size:14px;
-      color:#cfe3f5;
-      margin-top:6px;
-    }
-    .box{
-      margin-top:24px;
-      background:#123a57;
-      padding:24px;
-      border-radius:16px;
-    }
-    .box h2{
-      margin-top:0;
-      font-size:18px;
-    }
-    .btn{
-      display:inline-block;
-      margin-top:16px;
-      padding:14px 22px;
-      background:#4aa3ff;
-      color:#000;
-      font-weight:700;
-      border-radius:12px;
-      text-decoration:none;
-    }
-    .note{
-      margin-top:20px;
-      font-size:14px;
-      color:#e4f0fa;
-      line-height:1.8;
-    }
-    footer{
-      margin-top:30px;
-      font-size:13px;
-      color:#c2d9ec;
-      text-align:center;
-    }
+    .exBtn:hover{ background:rgba(255,255,255,.1); }
+
+    .chatWrap{ height: 600px; }
+    .chatBox{ flex:1; padding:15px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; }
+    
+    .msg{ max-width:85%; padding:12px; border-radius:15px; font-size:14px; line-height:1.6; position:relative; }
+    .ai{ align-self: flex-start; background:rgba(255,255,255,.1); border:1px solid var(--border); }
+    .me{ align-self: flex-end; background:var(--accent); color:white; }
+
+    .chatBottom{ padding:15px; border-top:1px solid var(--border); display:flex; gap:10px; }
+    textarea{ flex:1; height:50px; padding:10px; border-radius:12px; border:1px solid var(--border); background:rgba(0,0,0,.2); color:white; resize:none; font-family:inherit; }
+    
+    .sendBtn{ padding:0 25px; border-radius:12px; border:none; background:var(--accent); color:white; font-weight:800; cursor:pointer; }
+    .sendBtn:disabled{ opacity:0.5; }
+
+    .status-pill { display: flex; align-items: center; gap: 8px; font-size: 12px; background: rgba(0,0,0,0.3); padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); }
   </style>
 </head>
-
 <body>
-<div class="container">
 
-  <header>
-    <img src="https://i.postimg.cc/vHs9bTRM/O-U-O-U-U-O-U-U-3.png" alt="شعار المدرسة">
-    <img src="https://i.postimg.cc/9XGR82DL/sh%CA%BFar-wzart-alt%CA%BFl%D9%8Aym-aljdyd-1442-bdwn-khlfyt.png" alt="شعار وزارة التعليم">
-    <div>
-      <h1>المساعد الذكي للطلاب</h1>
-      <div class="sub">
-        مدرسة الإمام الشوكاني الابتدائية بالمذنب<br>
-        مدير المدرسة: توفيق بن ناصر العقيلي
+<div class="container">
+  <div class="topbar">
+    <div class="brand">
+      <img class="logo" src="https://i.postimg.cc/vHs9bTRM/O-U-O-U-U-O-U-U-3.png" alt="شعار">
+      <div class="titleWrap">
+        <h1 class="title">المساعد الذكي – مدرسة الإمام الشوكاني</h1>
+        <p class="subtitle">بإشراف الأستاذ: مقرن المطيري</p>
       </div>
     </div>
-  </header>
-
-  <div class="box">
-    <h2>التعلّم باستخدام الذكاء الاصطناعي</h2>
-    <p class="note">
-      تم إعداد هذه الصفحة لتمكين الطلاب من الاستفادة من أدوات الذكاء الاصطناعي في
-      شرح الدروس وحل الأسئلة بطريقة تعليمية آمنة، وذلك ضمن توجيه المعلم.
-    </p>
-
-    <a class="btn" href="https://gemini.google.com/app" target="_blank">
-      فتح محادثة Gemini
-    </a>
-
-    <p class="note">
-      ملاحظة: يتطلب استخدام الخدمة تسجيل الدخول بحساب Google للطالب.
-    </p>
+    <div class="status-pill">
+      <div class="dot" id="statusDot"></div>
+      <span id="statusText">جاهز</span>
+    </div>
   </div>
 
-  <footer>
-    تم تنفيذه داخل المدرسة من فريق البرمجة والذكاء الاصطناعي<br>
-    بإشراف الأستاذ مقرن المطيري
-  </footer>
+  <div class="grid">
+    <div class="panel">
+      <div class="panelHeader">أمثلة للطلاب</div>
+      <div class="panelBody">
+        <button class="exBtn" onclick="fillExample('اشرح لي معنى الاسم المقصور بأسلوب سهل')">ما هو الاسم المقصور؟</button>
+        <button class="exBtn" onclick="fillExample('كيف أجمع عددين كسريين؟')">جمع الكسور</button>
+        <button class="exBtn" onclick="fillExample('قل لي معلومة مفيدة عن الفضاء')">معلومة سريعة</button>
+      </div>
+    </div>
 
+    <div class="panel chatWrap">
+      <div class="chatBox" id="chatBox">
+        <div class="msg ai">مرحباً يا بطل! أنا مساعدك الذكي، كيف أساعدك في دروسك اليوم؟ 👋</div>
+      </div>
+      <div class="chatBottom">
+        <textarea id="q" placeholder="اكتب سؤالك هنا..."></textarea>
+        <button class="sendBtn" id="sendBtn" onclick="send()">إرسال</button>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  // ⚠️ ضع مفتاحك هنا
+  const GEMINI_API_KEY = "ضع_مفتاحك_هنا"; 
+
+  const chatBox = document.getElementById("chatBox");
+  const qInput = document.getElementById("q");
+  const sendBtn = document.getElementById("sendBtn");
+  const statusText = document.getElementById("statusText");
+
+  function fillExample(txt) { qInput.value = txt; qInput.focus(); }
+
+  function addMsg(text, type) {
+    const div = document.createElement("div");
+    div.className = "msg " + type;
+    div.innerText = text;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  async function send() {
+    const text = qInput.value.trim();
+    if (!text || sendBtn.disabled) return;
+
+    addMsg(text, "me");
+    qInput.value = "";
+    sendBtn.disabled = true;
+    statusText.innerText = "يفكر...";
+
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: `أنت مساعد تعليمي لطلاب في الصف السادس الابتدائي بمدرسة الإمام الشوكاني. أجب بلغة عربية فصحى بسيطة جداً مع استخدام رموز تعبيرية. السؤال: ${text}` }] }]
+        })
+      });
+
+      const data = await response.json();
+      
+      if (data.error) {
+        throw new Error(data.error.message);
+      }
+
+      const reply = data.candidates[0].content.parts[0].text;
+      addMsg(reply, "ai");
+
+    } catch (err) {
+      addMsg("حدث خطأ في الاتصال، تأكد من مفتاح الـ API الخاص بك.", "ai");
+      console.error(err);
+    } finally {
+      sendBtn.disabled = false;
+      statusText.innerText = "جاهز";
+    }
+  }
+
+  qInput.addEventListener("keypress", (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } });
+</script>
+
 </body>
 </html>
